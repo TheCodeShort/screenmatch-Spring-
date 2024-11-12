@@ -3,9 +3,12 @@ package com.aluracursos.screenmatch.principal;
 import com.aluracursos.screenmatch.model.DatosEpisodio;
 import com.aluracursos.screenmatch.model.DatosSerie;
 import com.aluracursos.screenmatch.model.DatosTemporadas;
+import com.aluracursos.screenmatch.model.Episodio;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
 import com.aluracursos.screenmatch.service.ConvierteDatos;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -61,6 +64,29 @@ public class Principal {
 						.sorted(Comparator.comparing(DatosEpisodio::evaluacion).reversed())
 						.limit(5)
 						.forEach(System.out::println);
+
+		//Convirtiendo los datos a una lista del tipo Episodio
+		List<Episodio> episodios = temporadas.stream()
+				.flatMap(t -> t.episodios().stream().map(d -> new Episodio(t.numero(),d)))
+				.collect(Collectors.toList());
+
+		episodios.forEach(System.out::println);
+
+		//Busqueda de episodios aparir de x año
+		System.out.println("indica el año apartir del cual deseas ver los episodios");
+		var fecha = teclado.nextLine();
+		teclado.nextLine();
+
+		LocalDate fehcaBusqueda = LocalDate.of(Integer.parseInt(fecha), 1,1);
+
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		episodios.stream()
+				.filter(e -> e.getFechaDelazamiento() != null && e.getFechaDelazamiento().isAfter(fehcaBusqueda))
+				.forEach(e -> System.out.println(
+						"Temporada" + e.getTemporada() +
+								"Episodio" + e.getTitulo() +
+									"fecha de lanzamiento" + e.getFechaDelazamiento().format(dtf)
+				));
 	}
 
 }
