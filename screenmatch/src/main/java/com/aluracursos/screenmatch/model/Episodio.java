@@ -11,6 +11,8 @@ public class Episodio {
 	private Double evaluacion;
 	private LocalDate fechaDelazamiento;
 
+
+
 	public Episodio(Integer numero, DatosEpisodio d) {
 		this.temporada = numero;
 		this.titulo = d.titulo();
@@ -63,6 +65,10 @@ public class Episodio {
 
 	public void setFechaDelazamiento(LocalDate fechaDelazamiento) {
 		this.fechaDelazamiento = fechaDelazamiento;
+	}
+
+	public Double getEvaluacion() {
+		return evaluacion;
 	}
 
 	@Override
