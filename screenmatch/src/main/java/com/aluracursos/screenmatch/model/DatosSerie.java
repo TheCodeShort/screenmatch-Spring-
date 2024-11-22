@@ -8,5 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public record DatosSerie(@JsonAlias ("Title") String titulo,/*@JsonAlias ("") lee la informacion de nuestra API y lo convierte a un objeto en java todo esto para ponerle un alias*/
                          @JsonAlias ("totalSeasons") Integer totalDeTemporadas,
-                         @JsonAlias ("imdbRating") String evaluacion) {  /*@JsonProperty leer y escribir enviar datos*/
+                         @JsonAlias ("imdbRating") String evaluacion,
+                         @JsonAlias ("Genre") String genero,
+                         @JsonAlias ("Actors") String actores,
+                         @JsonAlias ("Poster") String poster) {  /*@JsonProperty leer y escribir enviar datos*/
 }
