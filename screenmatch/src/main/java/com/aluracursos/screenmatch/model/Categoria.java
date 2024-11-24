@@ -13,9 +13,9 @@ public enum Categoria {
 		this.categoriaOmdb = categoriaOmdb;
 	}
 
-	private static Categoria fromString (String text){
+	public static Categoria fromString (String text){
 
-		for(Categoria categoria : Categoria.values()){
+		for(Categoria categoria : Categoria.values()){/*Tremos los valores, si la categoria coinsiden con las categorias mapaeadas y si no arroja el excepcion  */
 			if (categoria.categoriaOmdb.equalsIgnoreCase(text)){
 				return categoria;
 			}

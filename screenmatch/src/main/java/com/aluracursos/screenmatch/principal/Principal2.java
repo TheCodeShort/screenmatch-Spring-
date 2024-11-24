@@ -79,8 +79,12 @@ public class Principal2 {
 	}
 
 	private void mostrarSeriesBuscadas() {
-		datosSeries.forEach(System.out::println);
+
+		List<String> serie = new ArrayList<>();
+		serie = datosSeries.stream()
+							.map(d -> new Serie(d));
 	}
+
 
 
 
