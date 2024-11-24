@@ -1,5 +1,6 @@
 package com.aluracursos.screenmatch.principal;
 
+
 import com.aluracursos.screenmatch.model.DatosSerie;
 import com.aluracursos.screenmatch.model.DatosTemporadas;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
@@ -81,14 +82,6 @@ public class Principal2 {
 		datosSeries.forEach(System.out::println);
 	}
 
-	private static Categoria fromString (String text){
 
-		for(Categoria categoria : Categoria.values){
-			if (categoria.categoriaOmdb.equalsIgnoreCase(text)){
-				return categoria;
-			}
-		}
-	}
-	throw new IllegalArgumentException("Ninguna categoria encontrada: " + text);
 
 }
