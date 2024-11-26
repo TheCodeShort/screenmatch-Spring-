@@ -9,8 +9,9 @@ public class Serie {
 	 private Integer totalDeTemporadas;
 	 private Double evaluacion;
 	 private Categoria  genero;
-	private String poster;
-	private String actores;
+	 private String poster;
+	 private String actores;
+	private String sinopsis;
 
 	public Serie(DatosSerie datosSerie) {
 		this.titulo = datosSerie.titulo();
@@ -19,6 +20,7 @@ public class Serie {
 		this.genero = Categoria.fromString(datosSerie.genero().split(",")[0].trim());
 		this.evaluacion = OptionalDouble.of(Double.valueOf(datosSerie.evaluacion())).orElse(0);
 		this.totalDeTemporadas = datosSerie.totalDeTemporadas();
+		this.sinopsis = datosSerie.sinopsis();
 	}
 
 	public String getTitulo() {
@@ -71,13 +73,12 @@ public class Serie {
 
 	@Override
 	public String toString() {
-		return
+		return  "genero=" + genero +
 				"titulo='" + titulo +
 				", totalDeTemporadas=" + totalDeTemporadas +
 				", evaluacion=" + evaluacion +
-				", genero=" + genero +
-				", poster='" + poster +
-				", actores='" + actores
-				;
+				 ", poster='" + poster +
+				", actores='" + actores+
+		        ", sinopsis=" + sinopsis;
 	}
 }

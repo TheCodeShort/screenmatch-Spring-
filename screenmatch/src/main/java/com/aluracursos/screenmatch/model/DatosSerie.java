@@ -11,5 +11,6 @@ public record DatosSerie(@JsonAlias ("Title") String titulo,/*@JsonAlias ("") le
                          @JsonAlias ("imdbRating") String evaluacion,
                          @JsonAlias ("Genre") String genero,
                          @JsonAlias ("Actors") String actores,
-                         @JsonAlias ("Poster") String poster) {  /*@JsonProperty leer y escribir enviar datos*/
+                         @JsonAlias ("Poster") String poster,
+                         @JsonAlias("Plot")String sinopsis) {  /*@JsonProperty leer y escribir enviar datos*/
 }
