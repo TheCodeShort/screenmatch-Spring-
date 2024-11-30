@@ -2,16 +2,24 @@ package com.aluracursos.screenmatch.model;
 
 
 
-import java.util.OptionalDouble;
+import jakarta.persistence.*;
 
+import java.util.OptionalDouble;
+@Entity
+@Table(name = "series")
 public class Serie {
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 private  long id;
+	 @Column(unique = true)
 	 private String titulo;
 	 private Integer totalDeTemporadas;
 	 private Double evaluacion;
+	 @Enumerated(EnumType.STRING)
 	 private Categoria  genero;
 	 private String poster;
 	 private String actores;
-	private String sinopsis;
+	 private String sinopsis;
 
 	public Serie(DatosSerie datosSerie) {
 		this.titulo = datosSerie.titulo();
@@ -21,6 +29,14 @@ public class Serie {
 		this.evaluacion = OptionalDouble.of(Double.valueOf(datosSerie.evaluacion())).orElse(0);
 		this.totalDeTemporadas = datosSerie.totalDeTemporadas();
 		this.sinopsis = datosSerie.sinopsis();
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getTitulo() {
