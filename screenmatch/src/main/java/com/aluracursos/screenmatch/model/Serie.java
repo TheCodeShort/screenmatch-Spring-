@@ -4,9 +4,10 @@ package com.aluracursos.screenmatch.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.OptionalDouble;
-@Entity
-@Table(name = "series")
+@Entity//de esta manera creamos una entidad
+@Table(name = "series")//creamos una tabla y la podemos nombrar
 public class Serie {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +22,11 @@ public class Serie {
 	 private String actores;
 	 private String sinopsis;
 
+	 @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL,fetch = FetchType.EAGER) //de 1 a muchos esto hace que se relacionen las tablas  y las esta mapeando
+	 private List<Episodio> episodios;
+
+	 public Serie(){} //constructor predeterminado(personalizado) y somos obligado a agregarlos manualmente es una exigencia de que JPA
+
 	public Serie(DatosSerie datosSerie) {
 		this.titulo = datosSerie.titulo();
 		this.poster = datosSerie.poster();
@@ -29,6 +35,15 @@ public class Serie {
 		this.evaluacion = OptionalDouble.of(Double.valueOf(datosSerie.evaluacion())).orElse(0);
 		this.totalDeTemporadas = datosSerie.totalDeTemporadas();
 		this.sinopsis = datosSerie.sinopsis();
+	}
+
+	public List<Episodio> getEpisodios() {
+		return episodios;
+	}
+
+	public void setEpisodios(List<Episodio> episodios) {
+		 episodios.forEach(e -> e.setSerie(this));
+		this.episodios = episodios;
 	}
 
 	public long getId() {
@@ -90,11 +105,12 @@ public class Serie {
 	@Override
 	public String toString() {
 		return  "genero=" + genero +
-				"titulo='" + titulo +
+				", titulo='" + titulo +
 				", totalDeTemporadas=" + totalDeTemporadas +
 				", evaluacion=" + evaluacion +
-				 ", poster='" + poster +
-				", actores='" + actores+
-		        ", sinopsis=" + sinopsis;
+				 ", poster=" + poster +
+				", actores=" + actores+
+		        ", sinopsis=" + sinopsis+
+				"episodios=" + episodios;
 	}
 }
