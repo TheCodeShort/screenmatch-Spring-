@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
-
+/*ya que se ectiende de JpaRepository podemos usar sus metodo pero para poder llamar los metodos en se tiene que instanciar pero no se
+* puede con new JpaRepository() asi que se usa @Autowired para crear la instancia en nuestra clase ScreenmatchApplication*/
 public interface ISerieRepositorio extends JpaRepository <Serie, Long> {
 
 	Optional<Serie> findByTituloContainsIgnoreCase(String nombreSerie);

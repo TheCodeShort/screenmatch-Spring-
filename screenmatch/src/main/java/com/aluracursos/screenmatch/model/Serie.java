@@ -2,30 +2,35 @@ package com.aluracursos.screenmatch.model;
 
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.*;//JAP
 
 import java.util.List;
 import java.util.OptionalDouble;
-@Entity//de esta manera creamos una entidad
+
+
+@Entity//de esta manera creamos una entidad con JPA
 @Table(name = "series")//creamos una tabla y la podemos nombrar
 public class Serie {
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private  long id;
-	 @Column(unique = true)
+	 @Id//aca decimos que este sera mi ID de la tabla
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)//estrategia de generacion de mi ID cual sera mi ID 1,2,3, una llave incremental
+	 private  long id;//long nos indica que el ID sera un numero de 64 bits y el (id) es el nombre que le damos a la variable
+
+	 @Column(unique = true)//con esto decimos que no queremos cosas repetidas en este caso q no se repia una serie
 	 private String titulo;
 	 private Integer totalDeTemporadas;
 	 private Double evaluacion;
-	 @Enumerated(EnumType.STRING)
+	 @Enumerated(EnumType.STRING)//para identificar un valor que es distinto en este caso esto biene de la clase ENUM asi que tenemos que especificarlo
 	 private Categoria  genero;
 	 private String poster;
 	 private String actores;
 	 private String sinopsis;
 
+	 //@Transient conesto decimos que existe la lista episodio pero no la vamos a utilizar
 	 @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL,fetch = FetchType.EAGER) //de 1 a muchos esto hace que se relacionen las tablas  y las esta mapeando
+	 //traer los datos cuando lo pidamos o traerlo deuna vez con fetch = FetchType.EAGER
 	 private List<Episodio> episodios;
 
-	 public Serie(){} //constructor predeterminado(personalizado) y somos obligado a agregarlos manualmente es una exigencia de que JPA
+	 public Serie(){} //constructor predeterminado(personalizado) y somos obligado por JPA a agregarlos manualmente es una exigencia de que JPA
 
 	public Serie(DatosSerie datosSerie) {
 		this.titulo = datosSerie.titulo();
@@ -111,6 +116,6 @@ public class Serie {
 				 ", poster=" + poster +
 				", actores=" + actores+
 		        ", sinopsis=" + sinopsis+
-				"episodios=" + episodios;
+				" episodios=" + episodios;
 	}
 }

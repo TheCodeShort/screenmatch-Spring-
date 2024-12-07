@@ -43,7 +43,7 @@ public class Principal2 {
                     """;
 			System.out.println(menu);
 			opcion = teclado.nextInt();
-			teclado.nextLine();
+			teclado.nextLine();//para que no haya ningun prolema con el INT
 
 			switch (opcion) {
 				case 1:
@@ -83,7 +83,7 @@ public class Principal2 {
 	}
 
 
-	private DatosSerie getDatosSerie() {
+	private DatosSerie getDatosSerie() {//realiza la consulta
 		System.out.println("Escribe el nombre de la serie que deseas buscar");
 		var nombreSerie = teclado.nextLine();
 		var json = consumoApi.obtenerDatos(URL_BASE + nombreSerie.replace(" ", "+") + API_KEY);
@@ -94,7 +94,7 @@ public class Principal2 {
 
 	private void buscarEpisodioPorSerie() {
 		//DatosSerie datosSerie = getDatosSerie();
-		mostrarSeriesBuscadas();
+		mostrarSeriesBuscadas();//aca muestra la lista que esta en la base de datos
 		System.out.println("Escribe el nombre de la serie de la cual quieres ver los episodios");
 		var nombreSerie = teclado.nextLine();
 
@@ -102,7 +102,7 @@ public class Principal2 {
 										.filter(s->s.getTitulo().toLowerCase().contains(nombreSerie.toLowerCase()))
 										.findFirst();
 		if(serie.isPresent()){
-			var serieEncontrada= serie.get();
+			var serieEncontrada = serie.get();
 			List<DatosTemporadas> temporadas = new ArrayList<>();
 
 
@@ -124,14 +124,13 @@ public class Principal2 {
 	private void buscarSerieWeb() {
 		DatosSerie datos = getDatosSerie();
 		Serie serie = new Serie(datos);
-		repositorio.save(serie);
+		repositorio.save(serie);//el save lo pudemos usar en gracias a la inyeccion de dependencias
 		/*datosSeries.add(datos);*/
 		System.out.println(datos);
 	}
 	private void mostrarSeriesBuscadas() {
 
-		series = repositorio.findAll();
-
+		List<Serie> series = repositorio.findAll();//recupera todas las series de la base de datos
 
 		series.stream()
 				.sorted(Comparator.comparing(Serie::getGenero))
@@ -171,9 +170,9 @@ public class Principal2 {
 		teclado.nextLine();
 		System.out.println("¿Con evaluacion apartir de cual valor?");
 		var evaluacion = teclado.next();
-		List<Serie> filtroSeries = repositorio.filtrarSeriesPorTemporadaYEvaluacion(totalTemporadas,evaluacion);
+		/*List<Serie> filtroSeries = repositorio.seriesPorTemporadaYEvaluacion(totalTemporadas,evaluacion);
 		System.out.println("**series filtradas**");
-		filtroSeries.forEach(s-> System.out.println(s.getTitulo() + " - evaluacion:" + s.getEvaluacion()));
+		filtroSeries.forEach(s-> System.out.println(s.getTitulo() + " - evaluacion:" + s.getEvaluacion()));*/
 	}
 	private void buscarEpisodiosPorTitulo() {
 		System.out.println("Escribe el nombre del episodio que quieres buscar:");

@@ -15,8 +15,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
-	@Autowired
-	private ISerieRepositorio repositorio;
+	@Autowired//esto le indica a spring qu ese le va a hacer una inyeccion de dependencias
+	private ISerieRepositorio repositorio;//aca indicamos que es lo que le vamos a inyectar par ausar los metodos
+											//para usar los metodos toca crear un constructor
 
 	public static void main(String[] args) {
 		SpringApplication.run(ScreenmatchApplication.class, args);
@@ -29,7 +30,7 @@ public class ScreenmatchApplication implements CommandLineRunner {
 
 		Principal2 principal2 = new Principal2(repositorio);
 		principal2.muestraElMenu();
-		//:5432
+		//:5432 puerto de posgres por defecto
 
 		/*EjemploStreams ejemploStreams = new EjemploStreams();
 		ejemploStreams.nuestroMetodo();*/

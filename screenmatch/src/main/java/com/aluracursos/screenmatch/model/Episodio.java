@@ -22,7 +22,7 @@ public class Episodio {
 	@ManyToOne //de muchos a 1 esto hace que se relacione episodios con serie
 	private Serie serie;
 
-	public Episodio(){}//constructor
+	public Episodio(){}//constructor personalizado
 
 
 

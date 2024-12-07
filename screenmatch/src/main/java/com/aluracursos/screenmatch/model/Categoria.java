@@ -10,7 +10,7 @@ public enum Categoria {
 	private String categoriaOmdb;
 	private String categoriaEspanol;
 
-	Categoria (String categoriaOmdb, String categoriaEspanol){
+	Categoria (String categoriaOmdb, String categoriaEspanol){//esto me ayuda a que las constantes no me arrojen error y sepuedan usar
 		this.categoriaOmdb = categoriaOmdb;
 		this.categoriaEspanol = categoriaEspanol;
 	}
