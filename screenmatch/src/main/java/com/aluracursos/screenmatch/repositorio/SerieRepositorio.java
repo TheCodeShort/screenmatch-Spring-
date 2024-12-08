@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 /*ya que se ectiende de JpaRepository podemos usar sus metodo pero para poder llamar los metodos en se tiene que instanciar pero no se
 * puede con new JpaRepository() asi que se usa @Autowired para crear la instancia en nuestra clase ScreenmatchApplication*/
-public interface ISerieRepositorio extends JpaRepository <Serie, Long> {
+public interface SerieRepositorio extends JpaRepository <Serie, Long> {
 
 	Optional<Serie> findByTituloContainsIgnoreCase(String nombreSerie);
 
@@ -18,7 +18,7 @@ public interface ISerieRepositorio extends JpaRepository <Serie, Long> {
 
 	List<Serie> findByGenero(Categoria categoria);
 
-	@Query("SELECT * FROM Serie WHERE s.totalTemporadas <= :totalTemporadas AND s.evaluacion >= :evaluacion")
+	@Query("SELECT s FROM Serie s WHERE s.totalTemporadas <= :totalTemporadas AND s.evaluacion >= :evaluacion")
 	List<Serie> seriesPorTemporadaYEvaluacion(int totalTemporadas, Double evaluacion);
 
 	@Query("SELEC e FROM Serie s JOIN s.episodios e WHERE e.titulo ILIKE %:nombreEpisodio%")

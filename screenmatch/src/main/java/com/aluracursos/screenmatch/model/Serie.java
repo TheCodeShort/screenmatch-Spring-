@@ -17,7 +17,7 @@ public class Serie {
 
 	 @Column(unique = true)//con esto decimos que no queremos cosas repetidas en este caso q no se repia una serie
 	 private String titulo;
-	 private Integer totalDeTemporadas;
+	 private Integer totalTemporadas;
 	 private Double evaluacion;
 	 @Enumerated(EnumType.STRING)//para identificar un valor que es distinto en este caso esto biene de la clase ENUM asi que tenemos que especificarlo
 	 private Categoria  genero;
@@ -38,7 +38,7 @@ public class Serie {
 		this.actores = datosSerie.actores();
 		this.genero = Categoria.fromString(datosSerie.genero().split(",")[0].trim());
 		this.evaluacion = OptionalDouble.of(Double.valueOf(datosSerie.evaluacion())).orElse(0);
-		this.totalDeTemporadas = datosSerie.totalDeTemporadas();
+		this.totalTemporadas = datosSerie.totalDeTemporadas();
 		this.sinopsis = datosSerie.sinopsis();
 	}
 
@@ -68,11 +68,11 @@ public class Serie {
 	}
 
 	public Integer getTotalDeTemporadas() {
-		return totalDeTemporadas;
+		return totalTemporadas;
 	}
 
 	public void setTotalDeTemporadas(Integer totalDeTemporadas) {
-		this.totalDeTemporadas = totalDeTemporadas;
+		this.totalTemporadas = totalDeTemporadas;
 	}
 
 	public Double getEvaluacion() {
@@ -111,7 +111,7 @@ public class Serie {
 	public String toString() {
 		return  "genero=" + genero +
 				", titulo='" + titulo +
-				", totalDeTemporadas=" + totalDeTemporadas +
+				", totalDeTemporadas=" + totalTemporadas +
 				", evaluacion=" + evaluacion +
 				 ", poster=" + poster +
 				", actores=" + actores+
