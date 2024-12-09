@@ -131,7 +131,7 @@ public class Principal2 {
 	}
 	private void mostrarSeriesBuscadas() {
 
-		List<Serie> series = repositorio.findAll();//recupera todas las series de la base de datos
+		series = repositorio.findAll();//recupera todas las series de la base de datos
 
 		series.stream()
 				.sorted(Comparator.comparing(Serie::getGenero))
@@ -141,7 +141,7 @@ public class Principal2 {
 	private void buscarSeriePorTitulo() {
 		System.out.println("Escribe el nombre de la serie que desea buscar");
 		var nombreSerie = teclado.nextLine();
-		 Optional<Serie> serieBuscada = repositorio.findByTituloContainsIgnoreCase(nombreSerie);
+		  serieBuscada = repositorio.findByTituloContainsIgnoreCase(nombreSerie);
 
 		if (serieBuscada.isPresent()) {
 			System.out.println("La serie buscada es: " + serieBuscada.get());
